@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishak I. | Professional Full Stack Developer Portfolio</title>
+    <meta name="description" content="Professional portfolio of Ishak I. - Full Stack Developer specializing in Python, JavaScript, and Modern Web Architectures.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Animate On Scroll (AOS) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root {
+            /* Upgraded Luxury Theme Colors */
+            --bg-color: #030712;
+            --accent-color: #6366f1; /* Indigo Slate */
+            --secondary-accent: #10b981; /* Emerald Mint */
+            --text-color: #f9fafb;
+            --glass-bg: rgba(15, 23, 42, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Custom Premium Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #6366f1, #10b981);
+            border-radius: 10px;
+        }
+
+        /* Glassmorphism Evolution */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(99, 102, 241, 0.35);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.08), 0 0 25px rgba(16, 185, 129, 0.03);
+        }
+
+        .glass-nav {
+            background: rgba(3, 7, 18, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        /* Background Canvas Element */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Gradients */
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #ffffff 40%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-emerald {
+            background: linear-gradient(135deg, #6366f1 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Image Glow & Floating Matrix */
+        .glowing-border {
+            position: relative;
+            border-radius: 1.5rem;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .glowing-border::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #6366f1, #10b981, #6366f1);
+            background-size: 400%;
+            z-index: -1;
+            border-radius: calc(1.5rem + 2px);
+            animation: glowing-track 15s linear infinite;
+            filter: blur(6px);
+        }
+
+        @keyframes glowing-track {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .timeline-line {
+            background: linear-gradient(to bottom, #6366f1 0%, #10b981 100%);
+        }
+
+        .typed-cursor {
+            color: #10b981;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #10b981;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #030712;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(99, 102, 241, 0.1);
+            border-left-color: #6366f1;
+            border-right-color: #10b981;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-[#6366f1] selection:text-white">
+
+    <!-- Preloader Screen -->
+    <div id="preloader">
+        <div class="spinner mb-4"></div>
+        <div class="text-xs font-bold tracking-widest text-gradient-emerald" id="load-text">INITIALIZING ENVIRONMENT...</div>
+    </div>
+
+    <!-- Background Space Matrix -->
+    <div id="canvas-container"></div>
+
+    <!-- Scroll Progress Tracker -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-[#6366f1] to-[#10b981] z-50 transition-all duration-100" style="width: 0%"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300 glass-nav py-4" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold tracking-wider text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-[#6366f1] inline-block animate-pulse"></span>
+                ISHAK<span class="text-[#10b981]">.I</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-xs tracking-wider uppercase text-gray-300">
+                <a href="#home" class="nav-link hover:text-white transition-colors duration-200">Home</a>
+                <a href="#about" class="nav-link hover:text-white transition-colors duration-200">About</a>
+                <a href="#experience" class="nav-link hover:text-white transition-colors duration-200">Experience</a>
+                <a href="#skills" class="nav-link hover:text-white transition-colors duration-200">Skills</a>
+                <a href="#projects" class="nav-link hover:text-white transition-colors duration-200">Projects</a>
+                <a href="#education" class="nav-link hover:text-white transition-colors duration-200">Education</a>
+                <a href="#contact" class="px-4 py-2 rounded-lg border border-[#6366f1]/40 hover:border-[#10b981] hover:bg-[#10b981]/10 text-white transition-all duration-300 normal-case">Get in Touch</a>
+            </nav>
+
+            <button class="md:hidden text-white text-xl focus:outline-none" id="menu-btn" aria-label="Toggle Navigation">
+                <i class="fas fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Expansion Menu -->
+        <div class="hidden md:hidden absolute top-full left-0 w-full bg-[#030712]/98 backdrop-blur-2xl border-b border-white/5 px-6 py-6" id="mobile-menu">
+            <div class="flex flex-col gap-4 text-sm font-medium tracking-wide uppercase text-gray-300">
+                <a href="#home" class="mobile-link hover:text-white">Home</a>
+                <a href="#about" class="mobile-link hover:text-white">About</a>
+                <a href="#experience" class="mobile-link hover:text-white">Experience</a>
+                <a href="#skills" class="mobile-link hover:text-white">Skills</a>
+                <a href="#projects" class="mobile-link hover:text-white">Projects</a>
+                <a href="#education" class="mobile-link hover:text-white">Education</a>
+                <a href="#contact" class="mobile-link text-center mt-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#10b981] text-white normal-case">Contact Me</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main System Layout Container -->
+    <main class="max-w-7xl mx-auto px-6 relative z-10">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen pt-28 md:pt-0 flex flex-col md:flex-row items-center justify-between gap-12">
+            <div class="flex-1 space-y-6 text-center md:text-left" data-aos="fade-right" data-aos-duration="1000">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-gray-300">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Hello, I'm
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-none">
+                    ISHAK .I
+                </h1>
+                <div class="text-lg sm:text-xl font-medium text-gray-400 min-h-[30px]">
+                    Professional <span id="typed-text" class="text-[#10b981] font-semibold"></span>
+                </div>
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto md:mx-0 leading-relaxed">
+                    Highly motivated Full-Stack Developer with hands-on experience in building responsive web applications and a strong understanding of both front-end and back-end architectures. Quick learner with advanced analytical skills, eager to develop scalable software solutions.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
+                    <a href="#contact" class="px-6 py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#10b981] hover:from-[#10b981] hover:to-[#6366f1] text-white text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-md shadow-indigo-500/10 flex items-center gap-2">
+                        <i class="fas fa-envelope"></i> Let's Connect
+                    </a>
+                    <a href="#" onclick="alert('Resume download initialized.'); return false;" class="px-6 py-3 rounded-xl border border-white/10 hover:border-[#10b981] hover:bg-white/5 text-white text-sm font-semibold transition-all duration-300 transform hover:scale-105 flex items-center gap-2">
+                        <i class="fas fa-file-download"></i> Download Resume
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex-1 flex justify-center items-center" data-aos="fade-left" data-aos-duration="1000">
+                <div class="w-60 h-72 sm:w-72 sm:h-84 lg:w-80 lg:h-96 glowing-border overflow-hidden cursor-pointer" id="tilt-image-container">
+                    <!-- Reference to user provided photo file -->
+                    <img src="WhatsApp Image 2026-07-05 at 4.40.34 PM.jpeg" alt="Ishak I. Headshot" class="w-full h-full object-cover transition-transform duration-500 scale-100 group-hover:scale-105">
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-24 space-y-12 scroll-mt-16">
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-xs font-bold tracking-widest text-[#10b981] uppercase">Capabilities</p>
+                <h2 class="text-2xl sm:text-4xl font-black text-gradient-primary mt-1">Professional Focus.</h2>
+                <div class="w-12 h-0.5 bg-[#6366f1] mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center space-y-3" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-12 h-12 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#6366f1] text-xl">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white">Full Stack Development</h3>
+                    <p class="text-xs text-gray-400">Building coherent structures spanning presentation logic to structural data architectures.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center space-y-3" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-12 h-12 rounded-xl bg-[#10b981]/10 border border-[#10b981]/20 flex items-center justify-center text-[#10b981] text-xl">
+                        <i class="fas fa-crop-alt"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white">Responsive UI/UX</h3>
+                    <p class="text-xs text-gray-400">Crafting fluid layout engines targeted across all dynamic screen break points seamlessly.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center space-y-3" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-12 h-12 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center text-[#6366f1] text-xl">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white">SEO & Social Strategy</h3>
+                    <p class="text-xs text-gray-400">Optimizing web structures to maximize continuous traffic acquisition models efficiently.</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center space-y-3" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="w-12 h-12 rounded-xl bg-[#10b981]/10 border border-[#10b981]/20 flex items-center justify-center text-[#10b981] text-xl">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white">Digital Marketing</h3>
+                    <p class="text-xs text-gray-400">Analyzing consumer conversion statistics and formulating impactful operational content approaches.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="py-24 space-y-12 scroll-mt-16">
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-xs font-bold tracking-widest text-[#10b981] uppercase">Professional Timeline</p>
+                <h2 class="text-2xl sm:text-4xl font-black text-gradient-primary mt-1">Experience.</h2>
+                <div class="w-12 h-0.5 bg-[#6366f1] mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="relative max-w-3xl mx-auto pt-6">
+                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 timeline-line transform md:translateX(-50%)"></div>
+
+                <!-- Timeline Element 1 -->
+                <div class="relative flex flex-col md:flex-row items-start md:justify-between mb-12" data-aos="fade-up">
+                    <div class="absolute left-4 md:left-1/2 w-3.5 h-3.5 rounded-full bg-[#10b981] border-4 border-[#030712] transform -translate-x-1/2 top-1.5 z-20"></div>
+                    
+                    <div class="w-full md:w-[45%] pl-10 md:pl-0 md:text-right">
+                        <div class="inline-block px-3 py-0.5 rounded-full bg-[#10b981]/10 border border-[#10b981]/20 text-xs font-bold text-[#10b981] mb-1">
+                            June 2023 – Present
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Sales Executive</h3>
+                        <h4 class="text-sm font-semibold text-[#6366f1] mt-0.5">Royal Footwear</h4>
+                        <p class="text-xs text-gray-500 mt-0.5"><i class="fas fa-map-marker-alt"></i> Kundrathur, Chennai</p>
+                    </div>
+
+                    <div class="w-full md:w-[45%] pl-10 md:pl-0 mt-3 md:mt-0">
+                        <div class="glass-card p-5 rounded-xl space-y-2">
+                            <ul class="space-y-1.5 text-xs text-gray-400 list-disc list-inside">
+                                <li>Managed daily store operations and high-touch customer interaction patterns.</li>
+                                <li>Consistently exceeded transactional retail metrics through strategic upselling frameworks.</li>
+                                <li>Successfully onboarded and trained 4 new operational customer staff members.</li>
+                                <li>Supervised meticulous ledger cash reconciliations and active inventory parameters.</li>
+                                <li>Curated corporate visual merchandising blueprints increasing store pathing flow.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="py-24 space-y-12 scroll-mt-16">
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-xs font-bold tracking-widest text-[#10b981] uppercase">Technical Index</p>
+                <h2 class="text-2xl sm:text-4xl font-black text-gradient-primary mt-1">Skills Matrix.</h2>
+                <div class="w-12 h-0.5 bg-[#6366f1] mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-4">
+                <div class="glass-card p-6 rounded-xl space-y-4" data-aos="fade-right">
+                    <h3 class="text-base font-bold text-white border-b border-white/5 pb-2 flex items-center gap-2">
+                        <i class="fas fa-code text-[#10b981]"></i> Core Development
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-gray-300">Python Architecture</span>
+                                <span class="text-[#10b981]">Advanced</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-[#6366f1] to-[#10b981]" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-gray-300">JavaScript Execution Engine</span>
+                                <span class="text-[#10b981]">Proefficient</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-[#6366f1] to-[#10b981]" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-gray-300">HTML5 / CSS3 Layouts</span>
+                                <span class="text-[#10b981]">Expert</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-[#6366f1] to-[#10b981]" style="width: 95%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl space-y-4" data-aos="fade-left">
+                    <h3 class="text-base font-bold text-white border-b border-white/5 pb-2 flex items-center gap-2">
+                        <i class="fas fa-chart-bar text-[#6366f1]"></i> Strategy & Management
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-gray-300">Digital Marketing Modules</span>
+                                <span class="text-[#6366f1]">90%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-[#10b981] to-[#6366f1]" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-gray-300">SEO & Traffic Infrastructure</span>
+                                <span class="text-[#6366f1]">85%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-[#10b981] to-[#6366f1]" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-medium">
+                                <span class="text-gray-300">Team Leadership & Onboarding</span>
+                                <span class="text-[#6366f1]">88%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full bg-gradient-to-r from-[#10b981] to-[#6366f1]" style="width: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-24 space-y-12 scroll-mt-16">
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-xs font-bold tracking-widest text-[#10b981] uppercase">Engineering Blueprints</p>
+                <h2 class="text-2xl sm:text-4xl font-black text-gradient-primary mt-1">Highlighted Projects.</h2>
+                <div class="w-12 h-0.5 bg-[#6366f1] mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto pt-4">
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col group h-full" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6 flex flex-col flex-grow space-y-3">
+                        <div class="text-xs font-bold text-[#10b981] tracking-wider uppercase">Full Stack Infrastructure</div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-[#6366f1] transition-colors">Responsive Corporate Interface Application</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed flex-grow">
+                            Designed structural web blueprints deploying full Python data operations with unified HTML/CSS presenting layer for continuous low-latency runtime behavior.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-white/5 text-gray-300 border border-white/5">Python</span>
+                            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-white/5 text-gray-300 border border-white/5">JavaScript</span>
+                            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-white/5 text-gray-300 border border-white/5">Responsive UI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-xl overflow-hidden flex flex-col group h-full" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6 flex flex-col flex-grow space-y-3">
+                        <div class="text-xs font-bold text-[#6366f1] tracking-wider uppercase">Digital Marketing Optimization</div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-[#10b981] transition-colors">SEO Performance & Content Matrix</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed flex-grow">
+                            Engineered clean meta-structures and content pipelines built to optimize keyword authority indices and organic engagement vectors.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-white/5 text-gray-300 border border-white/5">SEO Strategy</span>
+                            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-white/5 text-gray-300 border border-white/5">Social Marketing</span>
+                            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-white/5 text-gray-300 border border-white/5">Content Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education" class="py-24 space-y-12 scroll-mt-16">
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-xs font-bold tracking-widest text-[#10b981] uppercase">Education & History</p>
+                <h2 class="text-2xl sm:text-4xl font-black text-gradient-primary mt-1">Qualifications.</h2>
+                <div class="w-12 h-0.5 bg-[#6366f1] mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-4">
+                <div class="glass-card p-5 rounded-xl space-y-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-[10px] font-bold text-[#10b981] bg-[#10b981]/10 px-2 py-0.5 rounded w-max">Dec 2025 - Present</div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">B.Sc. Computer Science</h3>
+                        <p class="text-xs text-gray-400 mt-1">Kundrathur Arts and Science College</p>
+                        <p class="text-[11px] text-gray-500 font-semibold mt-0.5">University of Madras</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl space-y-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-[10px] font-bold text-[#6366f1] bg-[#6366f1]/10 px-2 py-0.5 rounded w-max">2021 - 2023</div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">12th Standard State Board</h3>
+                        <p class="text-xs text-gray-400 mt-1">M.N.A Abdhurrahman Hr. Sec. School</p>
+                        <p class="text-[11px] text-[#10b981] mt-0.5">Computer Science with Maths (Tirunelveli)</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 rounded-xl space-y-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-[10px] font-bold text-[#10b981] bg-[#10b981]/10 px-2 py-0.5 rounded w-max">2019 - 2021</div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">10th Standard State Board</h3>
+                        <p class="text-xs text-gray-400 mt-1">Perumbakkam Govt. Hr. Sec. School</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credentials Module Frame -->
+            <div class="max-w-xl mx-auto pt-6" data-aos="zoom-in">
+                <div class="glass-card p-5 rounded-xl flex items-center gap-4 border-l-2 border-l-[#6366f1]">
+                    <div class="text-2xl text-[#6366f1]"><i class="fas fa-award"></i></div>
+                    <div>
+                        <h3 class="text-sm font-bold text-white">Full Stack Developing Track</h3>
+                        <p class="text-xs text-[#10b981] font-medium">Infogro Technology, Maduravoyal, Chennai</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-24 space-y-12 scroll-mt-16">
+            <div class="text-center" data-aos="fade-up">
+                <p class="text-xs font-bold tracking-widest text-[#10b981] uppercase">Get In Touch</p>
+                <h2 class="text-2xl sm:text-4xl font-black text-gradient-primary mt-1">Contact Portal.</h2>
+                <div class="w-12 h-0.5 bg-[#6366f1] mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-5xl mx-auto pt-4">
+                <div class="lg:col-span-5 space-y-5" data-aos="fade-right">
+                    <h3 class="text-xl font-bold text-white">Inquire for collaborations</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        I am eager to contribute to multi-disciplinary development teams and engineer production-grade enterprise software systems. Reach out directly.
+                    </p>
+                    
+                    <div class="space-y-3 text-xs">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#10b981]"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <p class="text-[10px] text-gray-500">Email Address</p>
+                                <a href="mailto:ishakdchad09564@gmail.com" class="text-white hover:text-[#10b981] font-medium">ishakdchad09564@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#6366f1]"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <p class="text-[10px] text-gray-500">Call Directly</p>
+                                <a href="tel:+918122218709" class="text-white hover:text-[#6366f1] font-medium">+91 81222 18709</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#10b981]"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <p class="text-[10px] text-gray-500">Location Base</p>
+                                <span class="text-white font-medium">Kundrathur, Chennai - 600069</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7" data-aos="fade-left">
+                    <form id="contact-form" class="glass-card p-6 rounded-xl space-y-4" onsubmit="event.preventDefault(); alert('Transmission simulated successfully.'); this.reset();">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label for="name" class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">Name</label>
+                                <input type="text" id="name" required class="w-full bg-[#030712]/60 border border-white/10 focus:border-[#10b981] rounded-lg px-3 py-2 text-white outline-none transition-colors text-xs" placeholder="Your Name">
+                            </div>
+                            <div class="space-y-1">
+                                <label for="email" class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">Email</label>
+                                <input type="email" id="email" required class="w-full bg-[#030712]/60 border border-white/10 focus:border-[#10b981] rounded-lg px-3 py-2 text-white outline-none transition-colors text-xs" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label for="message" class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">Message</label>
+                            <textarea id="message" rows="4" required class="w-full bg-[#030712]/60 border border-white/10 focus:border-[#10b981] rounded-lg px-3 py-2 text-white outline-none transition-colors text-xs resize-none" placeholder="Project brief..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-lg bg-gradient-to-r from-[#6366f1] to-[#10b981] hover:from-[#10b981] hover:to-[#6366f1] text-white text-xs font-bold tracking-wider transition-all duration-300">
+                            TRANSMIT MESSAGE <i class="fas fa-paper-plane ml-1"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER TERMINAL MODULE -->
+    <footer class="w-full border-t border-white/5 bg-[#030712] mt-16 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+            <p>Designed with Precision by <span class="text-white font-medium">Ishak .I</span></p>
+            <p>&copy; 2026 Ishak. General Architecture Framework.</p>
+        </div>
+    </footer>
+
+    <!-- Dependency Implementations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.4,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        AOS.init({ duration: 700, once: true });
+                    }
+                });
+            }, 400);
+        });
+
+        // Sticky Luxury Nav Changes
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navbar.classList.add('py-2', 'shadow-md', 'bg-[#030712]/95');
+                navbar.classList.remove('py-4', 'bg-transparent');
+            } else {
+                navbar.classList.add('py-4', 'bg-transparent');
+                navbar.classList.remove('py-2', 'shadow-md', 'bg-[#030712]/95');
+            }
+        });
+
+        // Mobile System Controls Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.className = mobileMenu.classList.contains('hidden') ? 'fas fa-bars' : 'fas fa-times';
+        });
+
+        // Scroll Tracker Percentage Meter Indicator Node
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('progress-bar').style.width = ((winScroll / height) * 100) + '%';
+        });
+
+        // Setup String Typer Sequences
+        new Typed('#typed-text', {
+            strings: [
+                'Full Stack Developer',
+                'Technical Problem Solver',
+                'Digital Marketing Strategist',
+                'Web UI Designer'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true,
+            backDelay: 1800
+        });
+
+        // Mouse Capture Tilt Engine Matrix Framework Elements
+        const tiltContainer = document.getElementById('tilt-image-container');
+        if(tiltContainer) {
+            window.addEventListener('mousemove', (e) => {
+                const xOffset = (e.clientX / window.innerWidth - 0.5) * 20;
+                const yOffset = (e.clientY / window.innerHeight - 0.5) * -20;
+                gsap.to(tiltContainer, { rotationY: xOffset, rotationX: yOffset, transformPerspective: 800, duration: 0.5 });
+            });
+            tiltContainer.addEventListener('mouseleave', () => {
+                gsap.to(tiltContainer, { rotationY: 0, rotationX: 0, duration: 0.6 });
+            });
+        }
+
+        // ========================================================
+        // HIGH-PRECISION REFINED INTERACTIVE THREE.JS BACKDROP
+        // ========================================================
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 25;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // Ambient System Spatial Illumination Matrix Configurations
+        scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+        const dirLight = new THREE.DirectionalLight(0x10b981, 0.6);
+        dirLight.position.set(4, 8, 4);
+        scene.add(dirLight);
+
+        // Mathematical Micro Star System Arrays Matrix Configuration Grid 
+        const starsGeometry = new THREE.BufferGeometry();
+        const count = 900;
+        const positions = new Float32Array(count * 3);
+        for(let i=0; i<count*3; i++) { positions[i] = (Math.random() - 0.5) * 100; }
+        starsGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const starParticles = new THREE.Points(starsGeometry, new THREE.PointsMaterial({ color: 0x6366f1, size: 0.1, transparent: true, opacity: 0.6 }));
+        scene.add(starParticles);
+
+        // Smooth Interpolation Interaction Vectors Module Update Loops
+        let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.003;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.003;
+        });
+
+        function renderFrame() {
+            requestAnimationFrame(renderFrame);
+            const time = performance.now() * 0.0005;
+            starParticles.rotation.y = time * 0.02;
+            targetX += (mouseX - targetX) * 0.05;
+            targetY += (mouseY - targetY) * 0.05;
+            scene.rotation.y = targetX;
+            scene.rotation.x = targetY;
+            renderer.render(scene, camera);
+        }
+        renderFrame();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
